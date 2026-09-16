@@ -24,7 +24,7 @@
       body {
         min-height: 100vh;
         margin: 0;
-        overflow: hidden;
+        overflow-x: hidden;
         color: var(--ink);
         font-family: Outfit, sans-serif;
         background:
@@ -81,6 +81,20 @@
         transition: color 180ms ease;
       }
       .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--violet); }
+
+      .gallery-preview { padding: 3.5rem 0 2rem; }
+      .gallery-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+      .gallery-heading h2 { margin: .3rem 0 0; font-size: clamp(2rem, 4vw, 3.1rem); letter-spacing: -.065em; }
+      .gallery-heading a { color: var(--violet); font-size: .9rem; font-weight: 700; text-decoration: none; }
+      .gallery-grid { display: grid; grid-template-columns: 1.35fr .8fr .8fr; gap: 1rem; }
+      .gallery-tile { position: relative; min-height: 13rem; overflow: hidden; border: 1px solid rgba(255,255,255,.8); border-radius: 1.25rem; box-shadow: 0 13px 30px rgba(61,66,117,.1); }
+      .gallery-tile::after { position: absolute; right: 1rem; bottom: .8rem; color: white; font: .68rem DM Mono, monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .tile-sun { min-height: 18rem; background: radial-gradient(circle at 58% 39%, #ffe180 0 10%, #f38a62 10.5% 15%, transparent 15.5%), linear-gradient(160deg,#765eee,#e86cac 58%,#ffbb72); }
+      .tile-sun::after { content: 'daybreak'; }
+      .tile-blue { background: radial-gradient(circle at 66% 35%, #beffec 0 9%, transparent 9.5%), linear-gradient(140deg,#0c557e,#18acbb 55%,#92e3d1); }
+      .tile-blue::after { content: 'tidal'; }
+      .tile-pink { background: radial-gradient(circle at 30% 70%, #fff0a1 0 8%, transparent 8.5%), linear-gradient(135deg,#f75b9b,#fe9d75 52%,#ffe07b); }
+      .tile-pink::after { content: 'play'; }
 
       .brand {
         display: inline-flex;
@@ -283,6 +297,8 @@
         .playground { min-height: auto; padding: 1rem 0 2.5rem; }
         .window { transform: rotate(0); }
         .sticker { right: 0; bottom: 0.7rem; }
+        .gallery-grid { grid-template-columns: 1fr; }
+        .gallery-tile, .tile-sun { min-height: 11rem; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -299,6 +315,7 @@
         <nav class="site-nav" aria-label="Main navigation">
           <a href="index.html" aria-current="page">Home</a>
           <a href="about.html">About</a>
+          <a href="gallery.html">Gallery</a>
           <a href="contact.html">Contact</a>
           <span class="status"><span class="pulse"></span> all systems go</span>
         </nav>
@@ -329,6 +346,18 @@
           <div class="sticker" id="sticker" aria-hidden="true">👋</div>
         </section>
       </main>
+
+      <section class="gallery-preview" aria-labelledby="gallery-title">
+        <div class="gallery-heading">
+          <div><div class="eyebrow"><span class="spark">✦</span> a few bright things</div><h2 id="gallery-title">Our little gallery</h2></div>
+          <a href="gallery.html">See all pieces →</a>
+        </div>
+        <div class="gallery-grid">
+          <a class="gallery-tile tile-sun" href="gallery.html" aria-label="View Daybreak in the gallery"></a>
+          <a class="gallery-tile tile-blue" href="gallery.html" aria-label="View Tidal in the gallery"></a>
+          <a class="gallery-tile tile-pink" href="gallery.html" aria-label="View Play in the gallery"></a>
+        </div>
+      </section>
 
       <footer>
         <span>EST. 2026</span>
