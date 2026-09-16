@@ -72,6 +72,16 @@
 
       header, footer { display: flex; align-items: center; justify-content: space-between; }
 
+      .site-nav { display: flex; gap: 1.1rem; align-items: center; }
+      .site-nav a {
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 180ms ease;
+      }
+      .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--violet); }
+
       .brand {
         display: inline-flex;
         align-items: center;
@@ -286,7 +296,12 @@
     <div class="shell">
       <header>
         <div class="brand"><span class="brand-mark">&lt;/&gt;</span> first light</div>
-        <div class="status"><span class="pulse"></span> all systems go</div>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <span class="status"><span class="pulse"></span> all systems go</span>
+        </nav>
       </header>
 
       <main>
