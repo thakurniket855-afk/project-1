@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A bright, playful hello world landing page." />
+    <title>Hello, World!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #5f6d85;
+        --surface: rgba(255, 255, 255, 0.68);
+        --line: rgba(23, 32, 51, 0.09);
+        --violet: #755cf6;
+        --pink: #f056a7;
+        --yellow: #ffd15d;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: Outfit, sans-serif;
+        background:
+          radial-gradient(circle at 14% 17%, rgba(255, 209, 93, 0.8), transparent 23rem),
+          radial-gradient(circle at 87% 78%, rgba(84, 210, 196, 0.7), transparent 25rem),
+          linear-gradient(135deg, #f7f1ff 0%, #eef6ff 48%, #fff7ed 100%);
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(1px);
+        opacity: 0.74;
+        pointer-events: none;
+      }
+
+      .orb-one {
+        width: 16rem;
+        height: 16rem;
+        top: -5rem;
+        right: 11%;
+        background: #b49bff;
+        animation: drift 11s ease-in-out infinite alternate;
+      }
+
+      .orb-two {
+        width: 10rem;
+        height: 10rem;
+        bottom: -3rem;
+        left: 9%;
+        background: #ff9bcd;
+        animation: drift 8s ease-in-out infinite alternate-reverse;
+      }
+
+      .shell {
+        position: relative;
+        width: min(1120px, calc(100% - 3rem));
+        min-height: 100vh;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.65rem 0 2rem;
+      }
+
+      header, footer { display: flex; align-items: center; justify-content: space-between; }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .brand-mark {
+        width: 2rem;
+        height: 2rem;
+        display: grid;
+        place-items: center;
+        border-radius: 0.65rem;
+        color: white;
+        background: linear-gradient(135deg, var(--violet), var(--pink));
+        box-shadow: 0 8px 18px rgba(117, 92, 246, 0.3);
+      }
+
+      .status {
+        display: flex;
+        gap: 0.45rem;
+        align-items: center;
+        color: var(--muted);
+        font: 0.72rem DM Mono, monospace;
+      }
+
+      .pulse {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: #3cc995;
+        box-shadow: 0 0 0 0 rgba(60, 201, 149, 0.45);
+        animation: pulse 2s infinite;
+      }
+
+      main { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; align-items: center; }
+
+      .intro { animation: enter 700ms cubic-bezier(.2,.9,.2,1) both; }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.8rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: #5f4cce;
+        background: rgba(255,255,255,0.54);
+        font: 0.73rem DM Mono, monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .spark { color: var(--pink); font-size: 1rem; }
+
+      h1 {
+        max-width: 7ch;
+        margin: 1.15rem 0 1rem;
+        font-size: clamp(4rem, 9vw, 7.7rem);
+        line-height: 0.87;
+        letter-spacing: -0.085em;
+      }
+
+      .gradient-text {
+        background: linear-gradient(100deg, #6045e8 10%, #ec519d 54%, #ed861d 90%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .intro p {
+        max-width: 30rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.6vw, 1.18rem);
+        line-height: 1.6;
+      }
+
+      .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+      button {
+        border: 0;
+        cursor: pointer;
+        font: 600 0.92rem Outfit, sans-serif;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .button-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.1rem;
+        border-radius: 0.9rem;
+        color: white;
+        background: var(--ink);
+        box-shadow: 0 13px 24px rgba(23, 32, 51, 0.2);
+      }
+
+      .button-primary:hover { transform: translateY(-3px); box-shadow: 0 17px 27px rgba(23, 32, 51, 0.27); }
+      .button-primary:active { transform: translateY(0); }
+
+      .button-secondary {
+        padding: 0.82rem 1.05rem;
+        border: 1px solid var(--line);
+        border-radius: 0.9rem;
+        color: var(--ink);
+        background: rgba(255,255,255,0.45);
+      }
+      .button-secondary:hover { transform: translateY(-3px); background: rgba(255,255,255,0.8); }
+
+      .playground {
+        position: relative;
+        min-height: 25rem;
+        display: grid;
+        place-items: center;
+        animation: enter 700ms 150ms cubic-bezier(.2,.9,.2,1) both;
+      }
+
+      .window {
+        position: relative;
+        width: min(100%, 28rem);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.8);
+        border-radius: 1.35rem;
+        background: rgba(255,255,255,0.62);
+        box-shadow: 0 25px 60px rgba(65, 72, 130, 0.2);
+        backdrop-filter: blur(18px);
+        transform: rotate(3deg);
+        transition: transform 400ms ease;
+      }
+      .window:hover { transform: rotate(0deg) scale(1.02); }
+
+      .window-top {
+        display: flex;
+        align-items: center;
+        gap: 0.42rem;
+        height: 3rem;
+        padding: 0 1rem;
+        border-bottom: 1px solid var(--line);
+      }
+      .dot { width: 0.62rem; height: 0.62rem; border-radius: 50%; }
+      .dot:nth-child(1) { background: #ff7772; }
+      .dot:nth-child(2) { background: #ffd466; }
+      .dot:nth-child(3) { background: #55c79b; }
+      .window-title { margin-left: auto; color: #8490a5; font: 0.64rem DM Mono, monospace; }
+
+      .code { padding: 1.8rem; font: 0.9rem/1.75 DM Mono, monospace; }
+      .code-line { display: block; white-space: nowrap; }
+      .indent { padding-left: 1.4rem; }
+      .pink { color: #e24e95; }
+      .purple { color: #7253e8; }
+      .blue { color: #287fc3; }
+      .slate { color: #7e8ba0; }
+      .string { color: #c77823; }
+
+      .result {
+        margin: 0 1.5rem 1.5rem;
+        padding: 1.15rem;
+        border-radius: 0.85rem;
+        color: #5740cf;
+        background: linear-gradient(120deg, #eeeaff, #fff1f8);
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .cursor { display: inline-block; width: 0.5rem; height: 1.1rem; margin-left: 0.22rem; vertical-align: -0.18rem; background: currentColor; animation: blink 1s step-end infinite; }
+
+      .sticker {
+        position: absolute;
+        right: -0.55rem;
+        bottom: 0.9rem;
+        display: grid;
+        width: 5.2rem;
+        height: 5.2rem;
+        place-items: center;
+        border: 4px solid white;
+        border-radius: 50%;
+        background: var(--yellow);
+        box-shadow: 0 12px 23px rgba(178, 124, 28, 0.2);
+        font-size: 2.3rem;
+        transform: rotate(12deg);
+      }
+
+      footer { color: #78849a; font: 0.68rem DM Mono, monospace; }
+      .made-with { display: flex; gap: 0.4rem; align-items: center; }
+      .heart { color: var(--pink); font-size: 0.9rem; }
+
+      @keyframes drift { to { transform: translate(1.5rem, 2rem) scale(1.1); } }
+      @keyframes enter { from { opacity: 0; transform: translateY(1.5rem); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes pulse { 70% { box-shadow: 0 0 0 0.42rem rgba(60, 201, 149, 0); } 100% { box-shadow: 0 0 0 0 rgba(60, 201, 149, 0); } }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      @media (max-width: 760px) {
+        body { overflow: auto; }
+        .shell { min-height: 100svh; padding: 1.25rem 0; }
+        main { grid-template-columns: 1fr; gap: 1rem; padding: 2.75rem 0; }
+        h1 { font-size: clamp(3.8rem, 20vw, 5.5rem); }
+        .playground { min-height: auto; padding: 1rem 0 2.5rem; }
+        .window { transform: rotate(0); }
+        .sticker { right: 0; bottom: 0.7rem; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="shell">
+      <header>
+        <div class="brand"><span class="brand-mark">&lt;/&gt;</span> first light</div>
+        <div class="status"><span class="pulse"></span> all systems go</div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div class="eyebrow"><span class="spark">✦</span> A tiny corner of the internet</div>
+          <h1><span class="gradient-text" id="greeting">Hello,</span><br />World.</h1>
+          <p>One small line of code. One delightful beginning. This page is proof that every big idea can start with a friendly greeting.</p>
+          <div class="actions">
+            <button class="button-primary" id="helloButton">Say hello back <span aria-hidden="true">→</span></button>
+            <button class="button-secondary" id="themeButton">Change the vibe</button>
+          </div>
+        </section>
+
+        <section class="playground" aria-label="A hello world code example">
+          <article class="window">
+            <div class="window-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="window-title">hello-world.js</span></div>
+            <div class="code" aria-hidden="true">
+              <span class="code-line"><span class="pink">const</span> <span class="purple">message</span> <span class="slate">=</span></span>
+              <span class="code-line indent"><span class="string">&quot;Hello, World!&quot;</span><span class="slate">;</span></span>
+              <br />
+              <span class="code-line"><span class="blue">console</span><span class="slate">.</span><span class="purple">log</span><span class="slate">(</span><span class="purple">message</span><span class="slate">);</span></span>
+            </div>
+            <div class="result" id="consoleOutput">Hello, World!<span class="cursor"></span></div>
+          </article>
+          <div class="sticker" id="sticker" aria-hidden="true">👋</div>
+        </section>
+      </main>
+
+      <footer>
+        <span>EST. 2026</span>
+        <span class="made-with">made with <span class="heart">♥</span> and curiosity</span>
+      </footer>
+    </div>
+
+    <script>
+      const helloButton = document.querySelector('#helloButton');
+      const themeButton = document.querySelector('#themeButton');
+      const greeting = document.querySelector('#greeting');
+      const output = document.querySelector('#consoleOutput');
+      const sticker = document.querySelector('#sticker');
+      const greetings = ['Hello,', 'Bonjour,', 'Hola,', 'Ciao,', 'Namaste,'];
+      let greetingIndex = 0;
+      let warm = false;
+
+      helloButton.addEventListener('click', () => {
+        greetingIndex = (greetingIndex + 1) % greetings.length;
+        const word = greetings[greetingIndex];
+        greeting.textContent = word;
+        output.firstChild.textContent = `${word} World!`;
+        sticker.animate([
+          { transform: 'rotate(12deg) scale(1)' },
+          { transform: 'rotate(-10deg) scale(1.18)' },
+          { transform: 'rotate(12deg) scale(1)' }
+        ], { duration: 480, easing: 'ease-out' });
+      });
+
+      themeButton.addEventListener('click', () => {
+        warm = !warm;
+        document.body.style.background = warm
+          ? 'radial-gradient(circle at 12% 15%, rgba(255, 166, 102, 0.7), transparent 24rem), radial-gradient(circle at 87% 77%, rgba(255, 116, 175, 0.42), transparent 24rem), linear-gradient(135deg, #fff5ee, #fff3fa 55%, #f2edff)'
+          : '';
+        themeButton.textContent = warm ? 'Cool the vibe' : 'Change the vibe';
+      });
+    </script>
+  </body>
+</html>
